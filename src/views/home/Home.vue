@@ -101,7 +101,7 @@
         }
       },
       backClick(){
-        this.$refs.scroll.scroll.scrollTo(0,0,500)
+        this.$refs.scroll.scrollTo(0,0)
       }
     }
   }
