@@ -87,6 +87,8 @@
         getHomeGoods(type,page).then(res=>{
           this.goods[type].list.push(...res.data.list)
           this.goods[type].page+=1
+
+          this.$refs.scroll.scroll.finishPullUp()
         })
       },
       /**
@@ -113,6 +115,8 @@
       },
       loadMore(){
         this.getHomeGoods(this.curretType)
+
+        this.$refs.scroll.scroll.refresh()
       }
     }
   }
