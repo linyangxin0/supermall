@@ -2,7 +2,7 @@
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
 
-    <scroll class="content" ref="scroll">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScrol">
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"/>
       <feature-view></feature-view>
@@ -11,7 +11,7 @@
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
 <!--    组件的原生事件监听要使用native属性-->
-    <back-top @click.native="backClick"></back-top>
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -50,7 +50,8 @@
           'new':{page:0,list:[]},
           'sell':{page:0,list:[]}
         },
-        curretType:'pop'
+        curretType:'pop',
+        isShowBackTop:false
       }
     },
     computed:{
@@ -102,6 +103,9 @@
       },
       backClick(){
         this.$refs.scroll.scrollTo(0,0)
+      },
+      contentScrol(position){
+        this.isShowBackTop=(-position.y)>1000
       }
     }
   }
