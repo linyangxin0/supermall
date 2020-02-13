@@ -2,7 +2,11 @@
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
 
-    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScrol">
+    <scroll class="content" ref="scroll"
+            :probe-type="3"
+            @scroll="contentScrol"
+            :pull-up-load="true"
+            @pullingUp="loadMore">
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"/>
       <feature-view></feature-view>
@@ -106,6 +110,9 @@
       },
       contentScrol(position){
         this.isShowBackTop=(-position.y)>1000
+      },
+      loadMore(){
+        this.getHomeGoods(this.curretType)
       }
     }
   }
