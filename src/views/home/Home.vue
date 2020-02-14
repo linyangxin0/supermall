@@ -71,11 +71,15 @@
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
-
+    },
+    mounted() {
       //监听item中图片的加载完成
       this.$bus.$on('itemImageLoad',()=>{
         this.$refs.scroll.refresh()
       })
+    },
+    beforeDestroy() {
+      this.$bus.$off()
     },
     methods:{
       /**
