@@ -31,7 +31,7 @@
   import BackTop from "components/content/backtop/BackTop";
 
   import {getHomeMultidata, getHomeGoods} from "../../network/home";
-
+  import {debounce} from "common/Utils";
 
   export default {
     name: "Home",
@@ -74,8 +74,10 @@
     },
     mounted() {
       //监听item中图片的加载完成
-      const refresh=this.debounce(this.$refs.scroll.refresh,500)
+      //防抖动函数调用
+      const refresh=debounce(this.$refs.scroll.refresh,500)
       this.$bus.$on('itemImageLoad',()=>{
+        //使用上述的refresh
         refresh()
       })
     },
@@ -126,18 +128,7 @@
       loadMore(){
         this.getHomeGoods(this.curretType)
       },
-      //防抖函数
-      debounce(func,delay){
-        let timer=null
-        return function (...args) {
-          if (timer)
-            clearTimeout(timer)
 
-          timer=setTimeout(()=>{
-            func.apply(this,args)
-          },delay)
-        }
-      }
     }
   }
 </script>
