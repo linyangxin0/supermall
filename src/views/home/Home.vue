@@ -62,7 +62,8 @@
         curretType:'pop',
         isShowBackTop:false,
         tabOffSetTop:0,
-        isTabFixed:false
+        isTabFixed:false,
+        saveY:0
       }
     },
     computed:{
@@ -90,6 +91,15 @@
     },
     beforeDestroy() {
       this.$bus.$off()
+    },
+    //返回home时保持位置
+    activated() {
+      this.$refs.scroll.scrollTo(0,this.saveY,0)
+      this.$refs.scroll.refresh()
+    },
+    //离开home时，记录位置
+    deactivated(){
+      this.saveY=this.$refs.scroll.getScrollY()
     },
     methods:{
       /**
