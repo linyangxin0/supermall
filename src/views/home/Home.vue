@@ -71,6 +71,11 @@
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
+
+      //监听item中图片的加载完成
+      this.$bus.$on('itemImageLoad',()=>{
+        this.$refs.scroll.refresh()
+      })
     },
     methods:{
       /**
@@ -88,7 +93,7 @@
           this.goods[type].list.push(...res.data.list)
           this.goods[type].page+=1
 
-          this.$refs.scroll.scroll.finishPullUp()
+          this.$refs.scroll.finishPullUp()
         })
       },
       /**
@@ -115,8 +120,6 @@
       },
       loadMore(){
         this.getHomeGoods(this.curretType)
-
-        this.$refs.scroll.scroll.refresh()
       }
     }
   }
