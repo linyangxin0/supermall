@@ -154,19 +154,12 @@
     position: relative;
   }
 
-.home-nav{
-  background-color: var(--color-tint);
-  color: white;
-
-  /*position: fixed;*/
-  /*left: 0;*/
-  /*right: 0;*/
-  /*top: 0;*/
-  /*z-index: 9;*/
-}
+  .home-nav{
+    background-color: var(--color-tint);
+    color: white;
+  }
 
   .content{
-    /*height: 300px;*/
     overflow: hidden;
 
     position: absolute;
@@ -179,9 +172,4 @@
     z-index: 9;
   }
 
-  /*.content{*/
-  /*  height: calc(100% - 93px);*/
-  /*  overflow: hidden;*/
-  /*  margin-top: 51px;*/
-  /*}*/
 </style>
