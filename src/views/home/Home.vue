@@ -74,8 +74,9 @@
     },
     mounted() {
       //监听item中图片的加载完成
+      const refresh=this.debounce(this.$refs.scroll.refresh,500)
       this.$bus.$on('itemImageLoad',()=>{
-        this.$refs.scroll.refresh()
+        refresh()
       })
     },
     beforeDestroy() {
@@ -124,6 +125,18 @@
       },
       loadMore(){
         this.getHomeGoods(this.curretType)
+      },
+      //防抖函数
+      debounce(func,delay){
+        let timer=null
+        return function (...args) {
+          if (timer)
+            clearTimeout(timer)
+
+          timer=setTimeout(()=>{
+            func.apply(this,args)
+          },delay)
+        }
       }
     }
   }
