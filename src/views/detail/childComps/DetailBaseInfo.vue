@@ -8,6 +8,19 @@
       <span><s>{{goods.oldPrice}}</s></span>
       <div class="detail-base-info-discount">{{goods.discount}}</div>
     </div>
+    <div class="detail-base-info-service-info">
+      <div>{{goods.columns[0]}}</div>
+      <div>{{goods.columns[1]}}</div>
+      <div>{{goods.services[3].name}}</div>
+    </div>
+    <div>
+      <div class="detail-base-info-services">
+        <span v-for="index in goods.services.length-1">
+          <img :src="goods.services[index-1].icon">
+          <span>{{goods.services[index-1].name}}</span>
+        </span>
+      </div>
+    </div>
   </div>
 
 
@@ -62,4 +75,40 @@
     margin: 3px;
     border-radius: 25px;
   }
+
+  .detail-base-info-service-info{
+    margin-top: 10px;
+    display: flex;
+    text-align: center;
+    font-size: 12px;
+    color: #999999;
+    border-bottom: 1px solid rgba(100,100,100,.1);
+    padding-bottom: 10px;
+  }
+
+  .detail-base-info-service-info div{
+    flex: 1;
+    text-align: center;
+  }
+
+  .detail-base-info-services{
+    margin-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    font-size: 13px;
+    border-bottom: 3px solid rgba(100,100,100,.1);
+  }
+
+  .detail-base-info-services span{
+    flex: 1;
+    text-align: center;
+  }
+
+  .detail-base-info-services img{
+    width: 12px;
+    height: 12px;
+  }
+
+
+
 </style>
