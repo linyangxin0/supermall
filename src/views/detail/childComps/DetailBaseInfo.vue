@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="Object.keys(goods).length !== 0">
     <div>
       <div class="detail-base-info-title">{{goods.title}}</div>
     </div>
@@ -11,7 +11,7 @@
     <div class="detail-base-info-service-info">
       <div>{{goods.columns[0]}}</div>
       <div>{{goods.columns[1]}}</div>
-      <div>{{goods.services[3].name}}</div>
+      <div>{{goods.services[goods.services.length-1].name}}</div>
     </div>
     <div>
       <div class="detail-base-info-services">
@@ -32,9 +32,6 @@
     props:{
       goods:{
         type:Object,
-        default(){
-          return{}
-        }
       }
     }
   }
@@ -108,7 +105,5 @@
     width: 12px;
     height: 12px;
   }
-
-
 
 </style>
