@@ -20,7 +20,23 @@
         type:Object
       }
     },
-
+    data(){
+      return{
+        counter:0,
+        imagesLength:0
+      }
+    },
+    methods:{
+      imgLoad(){
+        if(++this.counter===this.imagesLength)
+          this.$emit('imageLoad')
+      }
+    },
+    watch:{
+      detailInfo(){
+        this.imagesLength=this.detailInfo.detailImage[0].list.length
+      }
+    }
   }
 </script>
 
