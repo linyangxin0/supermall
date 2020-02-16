@@ -1,7 +1,7 @@
 <template>
 <div id="detail">
-  <DetailNavBar @titleClick="titleClick" class="detail-nav"></DetailNavBar>
-  <scroll class="content" ref="scroll">
+  <DetailNavBar @titleClick="titleClick" class="detail-nav" ref="nav"></DetailNavBar>
+  <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
     <detail-swiper :top-images="topImages"></detail-swiper>
     <detail-base-info :goods="goods"></detail-base-info>
     <detail-shop-info :shop="shop"></detail-shop-info>
@@ -51,7 +51,8 @@
         recommendList:[],
         commentInfo: {},
         themeTopYs:[],
-        getThemeTopY:null
+        getThemeTopY:null,
+        currentIndex:0
       }
     },
     created() {
@@ -107,6 +108,19 @@
       },
       titleClick(index){
         this.$refs.scroll.scrollTo(0,-this.themeTopYs[index],200)
+      },
+      contentScroll(position){
+        // 获取Y值
+        const positionY=-position.y
+
+        // 与主题中的值进行对比
+        let length=this.themeTopYs.length
+        for(let i=0;i<length;i++){
+          if(this.currentIndex!==i&&((i<length-1&&positionY>=this.themeTopYs[i]&&positionY<this.themeTopYs[i+1])||(i===length-1&&positionY>=this.themeTopYs[i]))){
+            this.currentIndex=i
+            this.$refs.nav.currentIndex=this.currentIndex
+          }
+        }
       }
     }
   }
