@@ -10,7 +10,7 @@
     <detail-comment-info ref="comment" :comment-info="commentInfo"></detail-comment-info>
     <detail-recommend-info ref="recommend" :recommend-list="recommendList" @detailImageLoad="detailImageLoad"></detail-recommend-info>
   </scroll>
-
+  <detail-bottom-bar/>
 </div>
 </template>
 
@@ -26,6 +26,7 @@
   import DetailCommentInfo from "./childComps/DetailCommentInfo";
   import DetailRecommendInfo from "./childComps/DetailRecommendInfo";
   import {debounce} from "../../common/Utils";
+  import DetailBottomBar from "./childComps/DetailBottomBar";
 
   export default {
     name: "detail",
@@ -38,7 +39,8 @@
       DetailGoodsInfo,
       DetailParamInfo,
       DetailRecommendInfo,
-      DetailCommentInfo
+      DetailCommentInfo,
+      DetailBottomBar
     },
     data(){
       return{
@@ -138,7 +140,7 @@
   }
 
   .content{
-    height: calc(100% - 44px);
+    height: calc(100% - 44px - 49px);
   }
 
   .detail-nav{
