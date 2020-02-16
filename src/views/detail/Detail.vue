@@ -7,8 +7,8 @@
     <detail-shop-info :shop="shop"></detail-shop-info>
     <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"/>
     <detail-param-info :param-info="paramInfo"/>
-    <detail-comment-info></detail-comment-info>
-    <detail-recommend-info></detail-recommend-info>
+    <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
+    <detail-recommend-info :recommend-list="recommendList"></detail-recommend-info>
   </scroll>
 
 </div>
@@ -48,7 +48,7 @@
         detailInfo:{},
         paramInfo:{},
         recommendList:[],
-        commentInfo:{}
+        commentInfo: {},
       }
     },
     created() {
@@ -57,6 +57,7 @@
 
       //请求数据
       getDetail(this.iid).then(res=>{
+        console.log(res);
         const data=res.result
         //轮播图数据
         this.topImages=data.itemInfo.topImages
@@ -74,6 +75,7 @@
         //保存评论信息
         if (data.rate.list) {
           this.commentInfo = data.rate.list[0];
+          console.log(this.commentInfo);
         }
       })
 
