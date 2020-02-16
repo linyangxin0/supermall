@@ -89,6 +89,7 @@
           this.themeTopYs.push(this.$refs.params.$el.offsetTop)
           this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
           this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+          this.themeTopYs.push(Number.MAX_VALUE)
         },100)
       })
 
@@ -115,10 +116,11 @@
 
         // 与主题中的值进行对比
         let length=this.themeTopYs.length
-        for(let i=0;i<length;i++){
-          if(this.currentIndex!==i&&((i<length-1&&positionY>=this.themeTopYs[i]&&positionY<this.themeTopYs[i+1])||(i===length-1&&positionY>=this.themeTopYs[i]))){
-            this.currentIndex=i
-            this.$refs.nav.currentIndex=this.currentIndex
+        //条件一是防止赋值条件过于频繁，条件二是获取争取的i
+        for(let i=0;i<length-1;i++){
+          if(this.currentIndex!==i&&(positionY>=this.themeTopYs[i]&&positionY<this.themeTopYs[i+1])){
+              this.currentIndex=i
+              this.$refs.nav.currentIndex=this.currentIndex
           }
         }
       }
