@@ -6,7 +6,7 @@
 
     <div class="goods">
       <div  class="goods_item" v-for="item in recommendList">
-          <img :src="item.image">
+          <img :src="item.image" @load="imgLoad">
           <div class="goods_info">
             <p>{{item.title}}</p>
             <span class="price">{{item.discountPrice}}</span>
@@ -26,7 +26,22 @@
       recommendList:{
         type:Array
       }
-    }
+    },
+    data(){
+      return{
+        counter:0,
+        imagesLength:0
+      }
+    },
+    mounted() {
+      this.imagesLength=this.recommendList.length
+    },
+    methods:{
+      imgLoad(){
+        if(++this.counter===this.imagesLength)
+          this.$emit('detailImageLoad')
+      }
+    },
   }
 </script>
 

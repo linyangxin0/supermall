@@ -1,14 +1,14 @@
 <template>
 <div id="detail">
-  <DetailNavBar class="detail-nav"></DetailNavBar>
+  <DetailNavBar @titleClick="titleClick" class="detail-nav"></DetailNavBar>
   <scroll class="content" ref="scroll">
     <detail-swiper :top-images="topImages"></detail-swiper>
     <detail-base-info :goods="goods"></detail-base-info>
     <detail-shop-info :shop="shop"></detail-shop-info>
     <detail-goods-info :detail-info="detailInfo" @detailImageLoad="detailImageLoad"/>
-    <detail-param-info :param-info="paramInfo"/>
-    <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
-    <detail-recommend-info :recommend-list="recommendList"></detail-recommend-info>
+    <detail-param-info ref="params" :param-info="paramInfo"/>
+    <detail-comment-info ref="comment" :comment-info="commentInfo"></detail-comment-info>
+    <detail-recommend-info ref="recommend" :recommend-list="recommendList" @detailImageLoad="detailImageLoad"></detail-recommend-info>
   </scroll>
 
 </div>
@@ -25,6 +25,7 @@
   import DetailParamInfo from "./childComps/DetailParamInfo";
   import DetailCommentInfo from "./childComps/DetailCommentInfo";
   import DetailRecommendInfo from "./childComps/DetailRecommendInfo";
+  import {debounce} from "../../common/Utils";
 
   export default {
     name: "detail",
@@ -49,6 +50,8 @@
         paramInfo:{},
         recommendList:[],
         commentInfo: {},
+        themeTopYs:[],
+        getThemeTopY:null
       }
     },
     created() {
@@ -77,6 +80,15 @@
           this.commentInfo = data.rate.list[0];
           console.log(this.commentInfo);
         }
+
+        // 给top数组赋值,防抖操作
+        this.getThemeTopY=debounce(()=>{
+          this.themeTopYs=[]
+          this.themeTopYs.push(0)
+          this.themeTopYs.push(this.$refs.params.$el.offsetTop)
+          this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+          this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
+        },100)
       })
 
       getRecommend().then((res, error) => {
@@ -84,9 +96,17 @@
         this.recommendList = res.data.list
       })
     },
+    mounted() {
+    },
+    updated() {
+    },
     methods:{
       detailImageLoad(){
         this.$refs.scroll.refresh()
+        this.getThemeTopY()
+      },
+      titleClick(index){
+        this.$refs.scroll.scrollTo(0,-this.themeTopYs[index],200)
       }
     }
   }
