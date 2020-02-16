@@ -5,7 +5,7 @@
     <detail-swiper :top-images="topImages"></detail-swiper>
     <detail-base-info :goods="goods"></detail-base-info>
     <detail-shop-info :shop="shop"></detail-shop-info>
-    <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"/>
+    <detail-goods-info :detail-info="detailInfo" @detailImageLoad="detailImageLoad"/>
     <detail-param-info :param-info="paramInfo"/>
     <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
     <detail-recommend-info :recommend-list="recommendList"></detail-recommend-info>
@@ -85,8 +85,8 @@
       })
     },
     methods:{
-      imageLoad(){
-        this.refs.scroll.refresh()
+      detailImageLoad(){
+        this.$refs.scroll.refresh()
       }
     }
   }

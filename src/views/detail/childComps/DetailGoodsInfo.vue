@@ -7,7 +7,7 @@
       {{detailInfo.detailImage[0].key}}
     </div>
     <div  class="detail-goods-images">
-        <img v-for="(item,index) in detailInfo.detailImage[0].list" :src="item">
+        <img v-for="(item,index) in detailInfo.detailImage[0].list" :src="item" @load="imgLoad">
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@
     methods:{
       imgLoad(){
         if(++this.counter===this.imagesLength)
-          this.$emit('imageLoad')
+          this.$emit('detailImageLoad')
       }
     },
     watch:{
