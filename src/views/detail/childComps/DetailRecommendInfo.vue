@@ -53,11 +53,11 @@
     width: 50%;
     padding-bottom: 40px;
     position: relative;
-
   }
 
   .goods_item img {
     width: 97%;
+    padding-left: 2px;
   }
   .goods_info {
     /* 信息 */
