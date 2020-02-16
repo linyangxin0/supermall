@@ -10,6 +10,7 @@
     <detail-comment-info ref="comment" :comment-info="commentInfo"></detail-comment-info>
     <detail-recommend-info ref="recommend" :recommend-list="recommendList" @detailImageLoad="detailImageLoad"></detail-recommend-info>
   </scroll>
+  <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   <detail-bottom-bar/>
 </div>
 </template>
@@ -27,6 +28,9 @@
   import DetailRecommendInfo from "./childComps/DetailRecommendInfo";
   import {debounce} from "../../common/Utils";
   import DetailBottomBar from "./childComps/DetailBottomBar";
+  import {backTop} from "common/mixin"
+
+
 
   export default {
     name: "detail",
@@ -40,8 +44,9 @@
       DetailParamInfo,
       DetailRecommendInfo,
       DetailCommentInfo,
-      DetailBottomBar
+      DetailBottomBar,
     },
+    mixins:[backTop],
     data(){
       return{
         iid:null,
@@ -54,7 +59,7 @@
         commentInfo: {},
         themeTopYs:[],
         getThemeTopY:null,
-        currentIndex:0
+        currentIndex:0,
       }
     },
     created() {
@@ -125,7 +130,10 @@
               this.$refs.nav.currentIndex=this.currentIndex
           }
         }
-      }
+
+        //是否显示回到顶部
+        this.isShowBackTop=(-position.y)>1000
+      },
     }
   }
 </script>

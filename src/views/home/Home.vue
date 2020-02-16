@@ -33,15 +33,14 @@
   import TabControl from "components/content/tabControl/TabControl";
   import GoodsList from "components/content/goods/GoodsList";
   import Scroll from "components/common/scroll/Scroll";
-  import BackTop from "components/content/backtop/BackTop";
 
   import {getHomeMultidata, getHomeGoods} from "../../network/home";
   import {debounce} from "common/Utils";
+  import {backTop} from "common/mixin"
 
   export default {
     name: "Home",
     components:{
-      BackTop,
       RecommendView,
       NavBar,
       HomeSwiper,
@@ -50,6 +49,7 @@
       GoodsList,
       Scroll
     },
+    mixins:[backTop],
     data(){
       return{
         banners:[],
@@ -60,7 +60,6 @@
           'sell':{page:0,list:[]}
         },
         curretType:'pop',
-        isShowBackTop:false,
         tabOffSetTop:0,
         isTabFixed:false,
         saveY:0
@@ -137,9 +136,6 @@
         }
         this.$refs.tabControl1.currentIndex=index
         this.$refs.tabControl2.currentIndex=index
-      },
-      backClick(){
-        this.$refs.scroll.scrollTo(0,0)
       },
       contentScrol(position){
         //决定BackTop是否显示
