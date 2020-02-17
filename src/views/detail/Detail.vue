@@ -12,7 +12,7 @@
   </scroll>
   <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   <detail-bottom-bar @addCart="addToCart"/>
-  <toast message="hahaha"></toast>
+  <toast :message="message" :show="show"></toast>
 </div>
 </template>
 
@@ -64,6 +64,8 @@
         themeTopYs:[],
         getThemeTopY:null,
         currentIndex:0,
+        message:'',
+        show:false
       }
     },
     created() {
@@ -151,7 +153,13 @@
         // 2、将商品添加到购物车
         // 3、添加到购物车成功
         this.addCart(product).then(res=>{
-          console.log(res);
+          this.show=true
+          this.message=res
+
+          setTimeout(()=>{
+            this.show=false
+            this.message=''
+          },1500)
         })
 
         // this.$store.dispatch('addCart',product).then(res=>{
