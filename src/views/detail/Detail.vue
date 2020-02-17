@@ -12,6 +12,7 @@
   </scroll>
   <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   <detail-bottom-bar @addCart="addToCart"/>
+  <toast message="hahaha"></toast>
 </div>
 </template>
 
@@ -29,12 +30,15 @@
   import {debounce} from "../../common/Utils";
   import DetailBottomBar from "./childComps/DetailBottomBar";
   import {backTop} from "common/mixin"
+  import {mapActions} from 'vuex'
+  import Toast from "components/common/toast/Toast";
 
 
 
   export default {
     name: "detail",
     components:{
+      Toast,
       DetailBaseInfo,
       DetailNavBar,
       DetailSwiper,
@@ -110,6 +114,7 @@
     updated() {
     },
     methods:{
+      ...mapActions(['addCart']),
       detailImageLoad(){
         this.$refs.scroll.refresh()
         this.getThemeTopY()
@@ -144,7 +149,17 @@
         product.iid=this.iid
 
         // 2、将商品添加到购物车
-        this.$store.dispatch('addCart',product)
+        // 3、添加到购物车成功
+        this.addCart(product).then(res=>{
+          console.log(res);
+        })
+
+        // this.$store.dispatch('addCart',product).then(res=>{
+          // console.log(res);
+        // })
+
+
+
       }
     }
   }
