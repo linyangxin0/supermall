@@ -9,16 +9,7 @@
 <script>
   export default {
     name: "toast",
-    props:{
-      // message:{
-      //   type:String,
-      //   default: ''
-      // },
-      // show:{
-      //   type:Boolean,
-      //   default:false
-      // }
-    },
+    props:{},
     data(){
       return{
         message:'',
