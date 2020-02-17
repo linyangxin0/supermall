@@ -1,7 +1,7 @@
 <template>
   <div class="bottom-bar">
     <div class="check-content">
-      <check-button class="check-button"/>
+      <check-button class="check-button" :is-checked="isSelectAll" @click.native="checkClick"/>
       <span>全选</span>
     </div>
 
@@ -35,6 +35,21 @@
       },
       checkLength(){
         return this.cartList.filter(item=>item.checked).length
+      },
+      isSelectAll(){
+        // return !(this.cartList.filter(item=>!item.checked).length)
+        if(this.cartList.length===0)
+          return false
+        return !this.cartList.find(item=>!item.checked)
+      }
+    },
+    methods:{
+      checkClick(){
+        if(this.isSelectAll){
+          this.cartList.forEach(item=>item.checked=false)
+        }else {
+          this.cartList.forEach(item=>item.checked=true)
+        }
       }
     }
   }
