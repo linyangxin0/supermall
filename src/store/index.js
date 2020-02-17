@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import mutations from "./mutations";
 import actions from "./actions";
+import getters from "./getters";
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
   mutations,
     // mutations的目的是修改state中的状态
     //mutations中的每个方法尽可能完成的单一功能
-  actions
+  actions,
+  getters
 })
 
 

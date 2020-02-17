@@ -11,10 +11,10 @@ export default {
         oldProduct=item
     }
     if(oldProduct){
-      context.commit('ADD_COUNTER',oldProduct)
+      context.commit(ADD_COUNTER,oldProduct)
     }else {
       payload.count=1
-      context.commit('ADD_TO_CART',payload)
+      context.commit(ADD_TO_CART,payload)
     }
   }
 }
